@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Link, NavLink, Route, Routes, useLocation, useParams } from 'react-router-dom'
+import Lenis from 'lenis'
 import {
   ArrowDownRight,
   ArrowRight,
@@ -25,6 +26,8 @@ import {
 import { experiences, impactAreas, metrics, navigation, profile, skillGroups, tools, type Experience } from './content'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const AmbientScene = lazy(() => import('./AmbientScene'))
 
 const transition = { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const }
 const heroStatement = 'I lead enterprise programs, build strategic partnerships, and deliver excellence at global scale.'
@@ -160,30 +163,118 @@ function SiteShell({ theme, onThemeChange }: { theme: PortfolioTheme; onThemeCha
   const location = useLocation()
   const reducedMotion = useReducedMotion()
   const contentRef = useRef<HTMLDivElement>(null)
+  const pointerRef = useRef({ x: 0, y: 0 })
   const { scrollYProgress } = useScroll()
   const scrollScale = useSpring(scrollYProgress, { stiffness: 100, damping: 24, restDelta: 0.001 })
+
+  useEffect(() => {
+    if (reducedMotion) return
+    const lenis = new Lenis({ autoRaf: false, lerp: .1, smoothWheel: true })
+    const updateScrollTrigger = () => ScrollTrigger.update()
+    const updateLenis = (time: number) => lenis.raf(time * 1000)
+    lenis.on('scroll', updateScrollTrigger)
+    gsap.ticker.add(updateLenis)
+    gsap.ticker.lagSmoothing(0)
+
+    return () => {
+      gsap.ticker.remove(updateLenis)
+      gsap.ticker.lagSmoothing(500, 33)
+      lenis.off('scroll', updateScrollTrigger)
+      lenis.destroy()
+    }
+  }, [reducedMotion])
 
   useEffect(() => {
     if (reducedMotion || !contentRef.current) return
     const context = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>('[data-gsap]').forEach((element, index) => {
-        gsap.fromTo(element, { y: 36, opacity: 0, filter: 'blur(7px)' }, {
+        gsap.fromTo(element, { y: 54, opacity: 0, scale: .96, rotateX: index % 2 ? 5 : -5, transformPerspective: 1100 }, {
           y: 0,
           opacity: 1,
-          filter: 'blur(0px)',
-          duration: 0.95,
-          delay: (index % 3) * 0.07,
+          scale: 1,
+          rotateX: 0,
+          duration: 1.1,
+          delay: (index % 4) * 0.08,
           ease: 'power4.out',
-          scrollTrigger: { trigger: element, start: 'top 88%', once: true },
+          scrollTrigger: { trigger: element, start: 'top 90%', once: true },
         })
       })
+      const timelineProgress = contentRef.current?.querySelector<HTMLElement>('.timeline-progress')
+      if (timelineProgress) {
+        gsap.fromTo(timelineProgress, { scaleY: 0 }, {
+          scaleY: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: timelineProgress.parentElement, start: 'top 72%', end: 'bottom 65%', scrub: .8 },
+        })
+      }
+      const experienceRows = gsap.utils.toArray<HTMLElement>('.experience-row')
+      if (experienceRows.length) {
+        gsap.fromTo(experienceRows, { x: -24, rotateY: 3, opacity: .35 }, {
+          x: 0,
+          rotateY: 0,
+          opacity: 1,
+          stagger: .12,
+          ease: 'none',
+          scrollTrigger: { trigger: '.experience-timeline', start: 'top 78%', end: 'bottom 68%', scrub: .7 },
+        })
+      }
     }, contentRef)
     return () => context.revert()
+  }, [location.pathname, reducedMotion])
+
+  useEffect(() => {
+    if (reducedMotion) return
+    const cleanupHandlers: (() => void)[] = []
+
+    // Use quickTo setters so pointer movement stays smooth without React rerenders.
+    gsap.utils.toArray<HTMLElement>('.button, .header-contact').forEach((element) => {
+      const moveX = gsap.quickTo(element, 'x', { duration: .32, ease: 'power3.out' })
+      const moveY = gsap.quickTo(element, 'y', { duration: .32, ease: 'power3.out' })
+      const onMove = (event: PointerEvent) => {
+        if (event.pointerType === 'touch') return
+        const bounds = element.getBoundingClientRect()
+        moveX(((event.clientX - bounds.left) / bounds.width - .5) * 9)
+        moveY(((event.clientY - bounds.top) / bounds.height - .5) * 7)
+      }
+      const reset = () => { moveX(0); moveY(0) }
+      element.addEventListener('pointermove', onMove)
+      element.addEventListener('pointerleave', reset)
+      cleanupHandlers.push(() => {
+        element.removeEventListener('pointermove', onMove)
+        element.removeEventListener('pointerleave', reset)
+        gsap.set(element, { clearProps: 'x,y' })
+      })
+    })
+
+    gsap.utils.toArray<HTMLElement>('.impact-card, .skill-group, .resume-sheet, .dashboard-kpi, .company-pillar, .company-mark').forEach((element) => {
+      const tiltX = gsap.quickTo(element, 'rotationX', { duration: .45, ease: 'power3.out' })
+      const tiltY = gsap.quickTo(element, 'rotationY', { duration: .45, ease: 'power3.out' })
+      gsap.set(element, { transformPerspective: 900, transformOrigin: 'center center' })
+      const onMove = (event: PointerEvent) => {
+        if (event.pointerType === 'touch') return
+        const bounds = element.getBoundingClientRect()
+        tiltX(-((event.clientY - bounds.top) / bounds.height - .5) * 5)
+        tiltY(((event.clientX - bounds.left) / bounds.width - .5) * 6)
+      }
+      const reset = () => { tiltX(0); tiltY(0) }
+      element.addEventListener('pointermove', onMove)
+      element.addEventListener('pointerleave', reset)
+      cleanupHandlers.push(() => {
+        element.removeEventListener('pointermove', onMove)
+        element.removeEventListener('pointerleave', reset)
+        gsap.set(element, { clearProps: 'rotationX,rotationY,transformPerspective' })
+      })
+    })
+
+    return () => cleanupHandlers.forEach((cleanup) => cleanup())
   }, [location.pathname, reducedMotion])
 
   return (
     <div className="app-frame" data-theme={theme} onPointerMove={(event) => {
       if (event.pointerType === 'touch') return
+      const bounds = event.currentTarget.getBoundingClientRect()
+      pointerRef.current.x = ((event.clientX - bounds.left) / bounds.width - .5) * 2
+      pointerRef.current.y = -((event.clientY - bounds.top) / bounds.height - .5) * 2
       event.currentTarget.style.setProperty('--pointer-x', `${event.clientX}px`)
       event.currentTarget.style.setProperty('--pointer-y', `${event.clientY}px`)
     }}>
@@ -191,15 +282,19 @@ function SiteShell({ theme, onThemeChange }: { theme: PortfolioTheme; onThemeCha
       <div aria-hidden="true" className="theme-morning-sky" />
       <div aria-hidden="true" className="theme-night-stars" />
       <div aria-hidden="true" className="pointer-glow" />
+      <div aria-hidden="true" className="cursor-trail" />
+      <Suspense fallback={null}>
+        <AmbientScene pointerRef={pointerRef} reducedMotion={Boolean(reducedMotion)} theme={theme} />
+      </Suspense>
       <motion.div aria-hidden="true" className="scroll-progress" style={{ scaleX: scrollScale }} />
       <SiteHeader onThemeChange={onThemeChange} theme={theme} />
       <div ref={contentRef}>
         <AnimatePresence mode="wait" initial={false}>
           <motion.main
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             className="page-shell"
-            exit={{ opacity: 0, y: -8 }}
-            initial={{ opacity: 0, y: 14 }}
+            exit={{ opacity: 0, y: -22, scale: .985 }}
+            initial={{ opacity: 0, y: 26, scale: .985 }}
             key={location.pathname}
             transition={transition}
           >
@@ -407,6 +502,7 @@ function ExperiencePage() {
       <section className="experience-page section-wrap">
         <div className="timeline-intro"><span>2012 — PRESENT</span><span>SELECT A ROLE FOR DETAILS <ArrowDownRight size={14} /></span></div>
         <div className="experience-timeline">
+          <div aria-hidden="true" className="timeline-progress" />
           {experiences.map((item, index) => <Link aria-label={`Explore ${item.company} experience`} className={`experience-row accent-${item.accent}`} key={item.company} to={`/experience/${item.slug}`}>
             <span className="timeline-marker">0{index + 1}</span>
             <span className="experience-logo"><img alt="" loading="lazy" src={item.logo} /></span>
