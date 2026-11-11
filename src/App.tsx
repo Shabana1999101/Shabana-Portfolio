@@ -11,7 +11,6 @@ import {
   BriefcaseBusiness,
   Check,
   ChevronDown,
-  Download,
   ExternalLink,
   Globe2,
   Layers3,
@@ -28,7 +27,7 @@ import { experiences, impactAreas, metrics, navigation, profile, skillGroups, to
 gsap.registerPlugin(ScrollTrigger)
 
 const transition = { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const }
-const heroStatement = 'Driving enterprise programs, strategic partnerships, and delivery excellence at global scale.'
+const heroStatement = 'I lead enterprise programs, build strategic partnerships, and deliver excellence at global scale.'
 type PortfolioTheme = 'morning' | 'afternoon' | 'night'
 
 const themeOptions = [
@@ -138,15 +137,15 @@ function SiteFooter() {
         <Link aria-label="Shabana Ajmin home" className="wordmark" to="/">
           <span className="wordmark-mark">SA</span><span>SHABANA AJMIN</span>
         </Link>
-        <p>Program leadership for work that moves business forward.</p>
+        <p>I lead programs that move business forward.</p>
         <a className="footer-linkedin" href={profile.linkedIn} rel="noreferrer" target="_blank">
           LinkedIn <ArrowUpRight size={14} />
         </a>
       </div>
       <div className="footer-bottom">
-        <span>Hyderabad, India <span className="status-dot" /> Available for meaningful conversations</span>
+        <span>Hyderabad, India <span className="status-dot" /> I&apos;m available for meaningful conversations</span>
         <nav aria-label="Footer navigation">
-          {[...navigation, { label: 'Resume', path: '/resume' }, { label: 'Contact', path: '/contact' }].map((item) => (
+          {[...navigation, { label: 'Contact', path: '/contact' }].map((item) => (
             <Link key={item.path} to={item.path}>{item.label}</Link>
           ))}
         </nav>
@@ -272,7 +271,7 @@ function HomePage({ theme }: { theme: PortfolioTheme }) {
         <div aria-hidden="true" className="hero-orbit orbit-two" />
         <div className="hero-copy">
           <motion.div animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 16 }} transition={{ ...transition, delay: 0.08 }}>
-            <Eyebrow icon={<span className="status-dot" />}>Technical Program Manager · {profile.company}</Eyebrow>
+            <Eyebrow icon={<span className="status-dot" />}>I lead technical programs at {profile.company}</Eyebrow>
           </motion.div>
           <motion.h1 animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 26 }} transition={{ ...transition, delay: 0.16 }}>
             Shabana <span>Ajmin</span>
@@ -291,7 +290,7 @@ function HomePage({ theme }: { theme: PortfolioTheme }) {
           </div>
         </div>
         <motion.div className="hero-portrait-wrap" animate={{ opacity: 1, scale: 1, y: 0 }} initial={{ opacity: 0, scale: 0.96, y: 24 }} transition={{ ...transition, delay: 0.18 }}>
-          <div className="portrait-index">LEADERSHIP PROFILE <span>01 / 05</span></div>
+          <div className="portrait-index">MY LEADERSHIP PROFILE</div>
           <div className="hero-portrait-frame">
             <img alt="Shabana Ajmin" className="hero-portrait" src={theme === 'afternoon' ? '/IMAGES/afternoon-home-page.png' : profile.portrait} />
             <div className="portrait-caption"><span>PROGRAMS WITH PURPOSE</span><span>HYDERABAD, IN</span></div>
@@ -353,7 +352,7 @@ function CompanyMark({ experience, index }: { experience: Experience; index: num
 function AboutPage({ theme }: { theme: PortfolioTheme }) {
   return (
     <>
-      <PageIntro eyebrow="About Shabana" title={<>Leadership grounded<br /><em>in delivery.</em></>} copy="A program leader who brings people, partners, and priorities together to make complex enterprise work move with intention." />
+      <PageIntro eyebrow="About me" title={<>Leadership grounded<br /><em>in delivery.</em></>} copy="I bring people, partners, and priorities together to move complex enterprise work forward with intention." />
       <section className="about-feature section-wrap">
         <div className="about-photo" data-gsap><img alt="Shabana Ajmin, Technical Program Manager" decoding="async" loading="eager" src={theme === 'afternoon' ? '/IMAGES/afternoon-about-page.png' : profile.aboutPortrait} /><span>HYDERABAD · INDIA</span></div>
         <div className="about-narrative" data-gsap>
@@ -366,12 +365,12 @@ function AboutPage({ theme }: { theme: PortfolioTheme }) {
         </div>
       </section>
       <section className="philosophy-section section-wrap">
-        <SectionHeading eyebrow="Professional philosophy" title="Good governance creates room for better work." copy="A practical leadership system built around people, clear decisions, and consistent follow-through." />
+        <SectionHeading eyebrow="Professional philosophy" title="Good governance creates room for better work." copy="I build practical ways of working around people, clear decisions, and consistent follow-through." />
         <div className="principle-grid">
           {[
-            { number: '01', title: 'Make the outcome clear', copy: 'Connect day-to-day execution to the business result, so teams know what matters and why.' },
-            { number: '02', title: 'Treat risk as information', copy: 'Create a culture where emerging dependencies and issues are surfaced early and handled together.' },
-            { number: '03', title: 'Build trust through cadence', copy: 'Use steady communication and transparent measures to make accountability useful, not performative.' },
+            { number: '01', title: 'Make the outcome clear', copy: 'I connect day-to-day execution to business results so teams know what matters and why.' },
+            { number: '02', title: 'Treat risk as information', copy: 'I surface emerging dependencies and issues early, then work with teams to resolve them.' },
+            { number: '03', title: 'Build trust through cadence', copy: 'I use steady communication and transparent measures to make accountability useful.' },
           ].map((item) => <article className="principle" data-gsap key={item.number}><span>{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p></article>)}
         </div>
       </section>
@@ -379,10 +378,10 @@ function AboutPage({ theme }: { theme: PortfolioTheme }) {
         <div className="approach-intro" data-gsap><Eyebrow>Program management approach</Eyebrow><h2>From intent<br />to <em>operating rhythm.</em></h2></div>
         <div className="approach-steps">
           {[
-            ['01', 'Frame', 'Define the outcome, scope, decision owners, and measures of success.'],
-            ['02', 'Connect', 'Align teams and partners around dependencies, capacity, and milestones.'],
-            ['03', 'Steer', 'Use governance and performance signals to manage risk and maintain momentum.'],
-            ['04', 'Sustain', 'Embed ownership and operating practices so the change can hold.'],
+            ['01', 'Frame', 'I define the outcome, scope, decision owners, and measures of success.'],
+            ['02', 'Connect', 'I align teams and partners around dependencies, capacity, and milestones.'],
+            ['03', 'Steer', 'I use governance and performance signals to manage risk and maintain momentum.'],
+            ['04', 'Sustain', 'I establish ownership and operating practices that help changes last.'],
           ].map(([number, title, copy]) => <div className="approach-step" data-gsap key={number}><span>{number}</span><h3>{title}</h3><p>{copy}</p></div>)}
         </div>
       </section>
@@ -404,7 +403,7 @@ function CareerRoadmap() {
 function ExperiencePage() {
   return (
     <>
-      <PageIntro eyebrow="Experience" title={<>Five organizations.<br /><em>One through-line.</em></>} copy="A career shaped by increasingly complex delivery, broader stakeholder ecosystems, and a steady focus on execution excellence." />
+      <PageIntro eyebrow="Experience" title={<>Five organizations.<br /><em>One through-line.</em></>} copy="I have taken on increasingly complex delivery, broader stakeholder ecosystems, and a steady focus on execution excellence." />
       <section className="experience-page section-wrap">
         <div className="timeline-intro"><span>2012 — PRESENT</span><span>SELECT A ROLE FOR DETAILS <ArrowDownRight size={14} /></span></div>
         <div className="experience-timeline">
@@ -491,7 +490,7 @@ function CompanyStoryPage() {
 function LeadershipPage() {
   return (
     <>
-      <PageIntro eyebrow="Leadership impact" title={<>Scale is a number.<br /><em>Impact is what it enables.</em></>} copy="A portfolio of enterprise outcomes spanning financial stewardship, partner performance, global delivery, and recognition." />
+      <PageIntro eyebrow="Leadership impact" title={<>Scale is a number.<br /><em>Impact is what it enables.</em></>} copy="I deliver enterprise outcomes through financial stewardship, partner performance, and global delivery." />
       <section className="impact-feature section-wrap">
         <div className="impact-banner" data-gsap>
           <div><Eyebrow icon={<Zap size={14} />}>Executive portfolio snapshot</Eyebrow><strong>$8M<span>+</span></strong><p>monthly P&amp;L managed</p></div>
@@ -504,7 +503,7 @@ function LeadershipPage() {
         </div>
       </section>
       <section className="governance-section section-wrap">
-        <div className="governance-copy" data-gsap><Eyebrow icon={<ShieldCheck size={14} />}>Operating discipline</Eyebrow><h2>Governance that makes performance visible.</h2><p>Strong delivery depends on clear agreements and a shared view of progress. The frameworks below bring consistency to execution and decision-making.</p></div>
+        <div className="governance-copy" data-gsap><Eyebrow icon={<ShieldCheck size={14} />}>Operating discipline</Eyebrow><h2>Governance that makes performance visible.</h2><p>I use clear agreements and a shared view of progress to bring consistency to execution and decision-making.</p></div>
         <div className="governance-list">{[
           ['SLA', 'Service performance expectations'],
           ['KPI', 'Outcome and delivery visibility'],
@@ -514,7 +513,7 @@ function LeadershipPage() {
       </section>
       <section className="recognition-section section-wrap" data-gsap>
         <div className="recognition-icon"><Award size={22} /></div>
-        <div><Eyebrow>Recognition</Eyebrow><h2>CEO Stock Award recipient</h2><p>Recognized for contribution and impact at Gap Inc.</p></div>
+        <div><Eyebrow>Recognition</Eyebrow><h2>CEO Stock Award recipient</h2><p>I received this recognition for my contribution and impact at Gap Inc.</p></div>
         <span className="recognition-year">GAP INC · CEO</span>
       </section>
       <ContactBand />
@@ -531,35 +530,35 @@ function SkillsPage() {
 
   return (
     <>
-      <PageIntro eyebrow="Capabilities" title={<>A leadership toolkit<br /><em>built for delivery.</em></>} copy="A practical mix of enterprise program disciplines, governance capabilities, and platforms used to create alignment and momentum." />
+      <PageIntro eyebrow="Capabilities" title={<>A leadership toolkit<br /><em>built for delivery.</em></>} copy="I use enterprise program disciplines, governance capabilities, and technology to create alignment and momentum." />
       <section className="skills-page section-wrap">
         <label className="skills-search"><span>FILTER CAPABILITIES</span><input aria-label="Filter skills and tools" onChange={(event) => setSearch(event.target.value)} placeholder="Search capabilities or tools" value={search} /><span className="search-shortcut">⌕</span></label>
         <div className="skills-layout">
           <div className="skill-groups">{visibleGroups.map((group) => <article className="skill-group" data-gsap key={group.number}><div className="skill-group-heading"><span>{group.number}</span><h2>{group.title}</h2><span className="skill-count">{String(group.skills.length).padStart(2, '0')}</span></div><div className="skill-list">{group.skills.map((skill) => <span key={skill}>{skill}<ArrowUpRight size={13} /></span>)}</div></article>)}{visibleGroups.length === 0 && <p className="empty-state">No capability matches that search.</p>}</div>
-          <aside className="tools-panel" data-gsap><div className="tools-panel-heading"><Layers3 size={17} /><span>TECHNOLOGY ECOSYSTEM</span></div><p>Tools that support planning, collaboration, governance, and intelligent work.</p><div className="tool-cloud">{visibleTools.map((tool) => <span key={tool}>{tool}</span>)}{visibleTools.length === 0 && <span className="empty-state">No tools found</span>}</div><div className="ai-note"><Sparkles size={16} /><span>AI adoption<br /><small>Microsoft Copilot · Claude</small></span></div></aside>
+          <aside className="tools-panel" data-gsap><div className="tools-panel-heading"><Layers3 size={17} /><span>TECHNOLOGY ECOSYSTEM</span></div><p>I use these tools for planning, collaboration, governance, and intelligent work.</p><div className="tool-cloud">{visibleTools.map((tool) => <span key={tool}>{tool}</span>)}{visibleTools.length === 0 && <span className="empty-state">No tools found</span>}</div><div className="ai-note"><Sparkles size={16} /><span>How I use AI<br /><small>Microsoft Copilot · Claude</small></span></div></aside>
         </div>
       </section>
-      <section className="skills-principle section-wrap"><Network size={20} /><p>Tools change. The leadership system stays focused on <strong>clarity, alignment, and accountable delivery.</strong></p><Link className="text-link" to="/leadership">View impact <ArrowUpRight size={14} /></Link></section>
+      <section className="skills-principle section-wrap"><Network size={20} /><p>Tools change. I stay focused on <strong>clarity, alignment, and accountable delivery.</strong></p><Link className="text-link" to="/leadership">View impact <ArrowUpRight size={14} /></Link></section>
       <ContactBand />
     </>
   )
 }
 
-/** Summarizes resume highlights and provides a direct resume-request link. */
+/** Summarizes resume highlights and links to the full resume document. */
 function ResumePage() {
   return (
     <>
-      <PageIntro eyebrow="Resume" title={<>A clear view of<br /><em>the full journey.</em></>} copy="A concise overview of experience, leadership scope, and enterprise delivery capabilities." />
+      <PageIntro eyebrow="Resume" title={<>A clear view of<br /><em>the full journey.</em></>} copy="I share my experience, leadership scope, and enterprise delivery capabilities." />
       <section className="resume-page section-wrap">
         <div className="resume-sheet" data-gsap>
-          <div className="resume-sheet-top"><span>EXECUTIVE PROFILE</span><span>SHABANA AJMIN · 2026</span></div>
+          <div className="resume-sheet-top"><span>MY EXECUTIVE PROFILE</span><span>SHABANA AJMIN · 2026</span></div>
           <h2>Technical Program<br />Manager</h2>
           <p>Enterprise delivery · Strategic partnerships · Program governance</p>
           <div className="resume-rule" />
           <div className="resume-columns"><div><span>EXPERIENCE</span><strong>14+ years</strong></div><div><span>CURRENT ROLE</span><strong>Gap Inc</strong></div><div><span>LOCATION</span><strong>Hyderabad, India</strong></div></div>
           <div className="resume-watermark">SA</div>
         </div>
-        <div className="resume-note" data-gsap><Eyebrow>Resume document</Eyebrow><h2>Document coming soon.</h2><p>The resume PDF has not been added to the portfolio assets yet. Reach out directly and Shabana can share the latest version.</p><a className="button button-primary" href={`mailto:${profile.email}?subject=Resume%20request%20-%20Shabana%20Ajmin`}>Request resume <Mail size={15} /></a><span className="resume-no-file"><Download size={14} /> No PDF is currently available to download</span></div>
+        <div className="resume-note" data-gsap><Eyebrow>Resume document</Eyebrow><h2>View my full resume.</h2><p>I keep my current resume in Google Drive.</p><a className="button button-primary" href={profile.resumeUrl} rel="noreferrer" target="_blank">View resume <ExternalLink size={15} /></a></div>
       </section>
       <ContactBand />
     </>
@@ -570,16 +569,16 @@ function ResumePage() {
 function ContactPage() {
   return (
     <>
-      <PageIntro eyebrow="Contact" title={<>Let&apos;s make<br /><em>good work happen.</em></>} copy="For conversations about enterprise delivery, strategic program leadership, or future opportunities, reach out directly." />
+      <PageIntro eyebrow="Contact" title={<>Let&apos;s make<br /><em>good work happen.</em></>} copy="I welcome conversations about enterprise delivery, strategic program leadership, and future opportunities." />
       <section className="contact-page section-wrap">
-        <div className="contact-main" data-gsap><Eyebrow>Direct contact</Eyebrow><h2>Start with a conversation.</h2><p>No contact form or automated submission. Choose the channel that works best and connect directly.</p><a className="email-link" href={`mailto:${profile.email}`}>{profile.email}<ArrowUpRight size={17} /></a><a className="button button-primary" href={profile.linkedIn} rel="noreferrer" target="_blank">Connect on LinkedIn <ExternalLink size={15} /></a></div>
+        <div className="contact-main" data-gsap><Eyebrow>Direct contact</Eyebrow><h2>Start with a conversation.</h2><p>I don&apos;t use a contact form; you can reach me directly by email or LinkedIn.</p><a className="email-link" href={`mailto:${profile.email}`}>{profile.email}<ArrowUpRight size={17} /></a><a className="button button-primary" href={profile.linkedIn} rel="noreferrer" target="_blank">Connect on LinkedIn <ExternalLink size={15} /></a></div>
         <div className="contact-details">
           <a className="contact-detail" data-gsap href={`mailto:${profile.email}`}><span className="contact-icon"><Mail size={17} /></span><span><small>EMAIL</small><strong>{profile.email}</strong></span><ArrowUpRight size={15} /></a>
           <a className="contact-detail" data-gsap href={profile.linkedIn} rel="noreferrer" target="_blank"><span className="contact-icon linkedin-icon">in</span><span><small>LINKEDIN</small><strong>View professional profile</strong></span><ArrowUpRight size={15} /></a>
           <div className="contact-detail" data-gsap><span className="contact-icon"><Globe2 size={17} /></span><span><small>LOCATION</small><strong>{profile.location}</strong></span><span className="location-time">IST · UTC+5:30</span></div>
         </div>
       </section>
-      <div className="contact-note section-wrap" data-gsap><span className="status-dot" />Open to thoughtful conversations and new perspectives.</div>
+      <div className="contact-note section-wrap" data-gsap><span className="status-dot" />I&apos;m open to thoughtful conversations and new perspectives.</div>
     </>
   )
 }
@@ -639,7 +638,7 @@ function DashboardPage() {
   const reducedMotion = useReducedMotion()
   return (
     <>
-      <section className="dashboard-heading section-wrap"><div><Eyebrow icon={<span className="status-dot" />}>EXECUTIVE PORTFOLIO VIEW</Eyebrow><h1>Leadership<br /><em>command center.</em></h1><p>A structured snapshot of program scale, operating experience, and delivery capabilities.</p></div><div className="dashboard-date"><span>PORTFOLIO DATA</span><strong>UPDATED FOR 2026</strong><small>Curated profile · not live business data</small></div></section>
+      <section className="dashboard-heading section-wrap"><div><Eyebrow icon={<span className="status-dot" />}>MY EXECUTIVE PORTFOLIO</Eyebrow><h1>Leadership<br /><em>command center.</em></h1><p>I use this dashboard to share selected program, operating, and delivery highlights.</p></div><div className="dashboard-date"><span>PORTFOLIO DATA</span><strong>UPDATED FOR 2026</strong><small>Curated figures · not live business data</small></div></section>
       <section className="dashboard-page section-wrap">
         <div className="dashboard-kpis">{dashboardPanels.map((panel, index) => { const Icon = panel.icon; return <article className="dashboard-kpi" key={panel.title}><span className="dashboard-kpi-top"><Icon size={16} /><span>0{index + 1}</span></span><DashboardCount countTo={panel.countTo} value={panel.value} /><span>{panel.title}</span><small>{panel.note}</small></article> })}</div>
         <div className="dashboard-grid">
@@ -650,7 +649,7 @@ function DashboardPage() {
           <motion.section className="dashboard-panel" initial={reducedMotion ? false : { opacity: 0, x: -72 }} transition={{ ...transition, delay: 0.08 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.15 }}><div className="panel-heading"><div><span>CAPABILITY PORTFOLIO</span><h2>Leadership disciplines</h2></div><Link aria-label="Explore skills" to="/skills"><ArrowUpRight size={16} /></Link></div><div className="capability-tiles">{skillGroups.map((group) => <div className="capability-tile" key={group.number}><span>{group.number}</span><strong>{group.title}</strong><small>{group.skills.length} capabilities</small></div>)}</div></motion.section>
           <motion.section className="dashboard-panel ecosystem-panel" initial={reducedMotion ? false : { opacity: 0, x: 72 }} transition={{ ...transition, delay: 0.18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.15 }}><div className="panel-heading"><div><span>TECHNOLOGY ECOSYSTEM</span><h2>Platforms & tools</h2></div><Layers3 size={17} /></div><div className="dashboard-tools">{tools.map((tool) => <span key={tool}>{tool}</span>)}</div><div className="ecosystem-footer"><Sparkles size={14} />AI-enabled ways of working: Copilot · Claude</div></motion.section>
         </div>
-        <p className="dashboard-disclaimer">All figures and statements represent portfolio information supplied for this profile. This is not a live operational dashboard.</p>
+        <p className="dashboard-disclaimer">I share these figures as a snapshot of my portfolio; this is not live business data.</p>
       </section>
       <ContactBand />
     </>
