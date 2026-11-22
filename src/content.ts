@@ -51,8 +51,8 @@ export const experiences: Experience[] = [
     story: {
       theme: 'apparel',
       industry: 'Apparel · Retail · Global operations',
-      image: '/IMAGES/Gap-logo.png',
-      imageAlt: 'Gap Inc logo',
+      image: 'https://images.unsplash.com/photo-1582418702059-97ebafb35d09?auto=format&fit=crop&w=1800&q=85',
+      imageAlt: 'Apparel retail environment with clothing displays',
       headline: 'How I bring financial discipline to a global retail engine.',
       introduction: 'At Gap Inc, I connect financial stewardship, partner performance, and global delivery operations to keep enterprise programs aligned with business priorities.',
       facts: [
@@ -80,8 +80,8 @@ export const experiences: Experience[] = [
     story: {
       theme: 'banking',
       industry: 'Banking · Financial services',
-      image: '/IMAGES/hsbc-logo.jpg',
-      imageAlt: 'HSBC logo',
+      image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=85',
+      imageAlt: 'Modern financial district towers',
       headline: 'How I deliver projects in a high-governance environment.',
       introduction: 'As Project Manager, I coordinated stakeholders and dependencies in a complex financial services setting, creating clear plans and steady delivery visibility.',
       facts: [
@@ -109,8 +109,8 @@ export const experiences: Experience[] = [
     story: {
       theme: 'technology',
       industry: 'Technology · Project delivery',
-      image: '/IMAGES/genq-logo.jpg',
-      imageAlt: 'ZENQ logo',
+      image: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=85',
+      imageAlt: 'Contemporary collaborative project workspace',
       headline: 'How I turn project plans into coordinated team delivery.',
       introduction: 'At ZENQ, I led project teams through planning, execution, and stakeholder alignment, maintaining clear milestones and a steady operating rhythm.',
       facts: [
@@ -138,8 +138,8 @@ export const experiences: Experience[] = [
     story: {
       theme: 'enterprise',
       industry: 'Technology services · PMO',
-      image: '/IMAGES/wipro-logo.png',
-      imageAlt: 'Wipro logo',
+      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=85',
+      imageAlt: 'Close view of technology hardware and circuit components',
       headline: 'How I make delivery easier to steer through portfolio reporting.',
       introduction: 'During my six years at Wipro, I built deep PMO experience in governance, portfolio reporting, financial and resource planning, and executive-ready visibility.',
       facts: [
@@ -167,8 +167,8 @@ export const experiences: Experience[] = [
     story: {
       theme: 'operations',
       industry: 'Business operations · Service delivery',
-      image: '/IMAGES/NECX-LOGO.jpg',
-      imageAlt: 'NECX Private Limited logo',
+      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1800&q=85',
+      imageAlt: 'Organized warehouse operations and logistics space',
       headline: 'How I built the operational foundations of dependable delivery.',
       introduction: 'My early operations experience at NECX gave me a practical foundation in coordination, service support, process discipline, and cross-team communication.',
       facts: [
@@ -258,7 +258,7 @@ export const profile = {
   role: 'Technical Program Manager',
   company: 'Gap Inc',
   location: 'Hyderabad, India',
-  email: 'shaikajmin7@gmail.com',
+  email: 'shabanaajminshaik@gmail.com',
   linkedIn: 'https://www.linkedin.com/in/shabana-ajmin-9907a413b',
   resumeUrl: 'https://drive.google.com/file/d/1IxDJDvUzrklBFcp6CLGJ2bnOJkIPDkkk/view?usp=drive_link',
   portrait: '/IMAGES/shabana-about-page.png',

@@ -544,7 +544,6 @@ function CompanyStoryPage() {
             <img alt={`${experience.company} logo`} src={experience.logo} />
             <span>{experience.story.industry}</span>
           </motion.div>
-          <span className="company-art-index">PROGRAM STORY / 0{experienceIndex + 1}</span>
         </motion.div>
       </section>
 

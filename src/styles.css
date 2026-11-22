@@ -71,7 +71,9 @@ button { border: 0; }
 .header-contact { font-size: 11px; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(201,239,91,.55); padding: 8px 0; }
 .header-contact svg, .footer-linkedin svg, .text-link svg { color: var(--acid); }
 .menu-toggle { display: none; background: none; color: var(--paper); padding: 8px; }
-.page-shell { min-height: 55vh; }
+.page-shell { min-height: 55vh; position: relative; z-index: 2; }
+.button, .header-contact, .text-link, .experience-row, .company-page-link, .contact-detail { position: relative; z-index: 3; }
+#leadership-snapshot { scroll-margin-top: 104px; }
 .eyebrow { color: var(--acid); font: 500 10px/1.5 var(--mono); letter-spacing: .1em; text-transform: uppercase; display: flex; gap: 9px; align-items: center; margin: 0 0 22px; }
 .eyebrow svg { flex: 0 0 auto; }
 .hero { position: relative; min-height: 680px; display: grid; grid-template-columns: 1.15fr .85fr; align-items: center; padding-top: 40px; padding-bottom: 95px; }
@@ -732,14 +734,14 @@ html, body { background: var(--ink); color: var(--paper); }
 }
 
 .hero { min-height: 700px; padding-top: 48px; }
-.hero-copy h1 { max-width: 690px; color: #142033; font-size: 112px; line-height: .92; }
+.hero-copy h1 { max-width: 690px; color: #142033; font-size: clamp(52px, 6.2vw, 80px); line-height: .98; }
 .hero-copy h1 span { color: #2457c5; }
 .hero .eyebrow { color: #2457c5; }
-.hero-statement { max-width: 590px; color: #33455f; font-size: 21px; line-height: 1.55; }
+.hero-statement { max-width: 590px; color: #33455f; font-size: 18px; line-height: 1.6; }
 .hero-meta { color: #33455f; font-size: 12px; }
 .hero-meta .meta-label { color: #64758e; font-size: 9px; }
 .hero-actions { gap: 12px; }
-.hero-actions .button { min-height: 52px; padding-inline: 19px; font-size: 12px; }
+.hero-actions .button { min-height: 46px; padding-inline: 16px; font-size: 11px; }
 .hero-actions .button-primary { color: #fff; background: #142033; border: 1px solid #142033; box-shadow: 0 10px 24px rgba(20,32,51,.16); }
 .hero-actions .button-primary:hover { color: #fff; background: #2457c5; border-color: #2457c5; box-shadow: 0 13px 28px rgba(36,87,197,.24); }
 .hero-actions .button-quiet { min-height: 50px; padding-inline: 16px; border: 1px solid rgba(36,87,197,.24); background: rgba(255,255,255,.64); color: #142033; }
@@ -765,13 +767,13 @@ html, body { background: var(--ink); color: var(--paper); }
 
 @media (max-width: 980px) {
   .hero { min-height: 620px; }
-  .hero-copy h1 { font-size: 86px; }
+  .hero-copy h1 { font-size: clamp(48px, 7.5vw, 68px); }
 }
 
 @media (max-width: 720px) {
   .hero { min-height: auto; padding-top: 55px; }
-  .hero-copy h1 { font-size: 64px; line-height: .96; }
-  .hero-statement { font-size: 18px; }
+  .hero-copy h1 { font-size: clamp(43px, 12vw, 62px); line-height: .98; }
+  .hero-statement { font-size: 17px; }
   .hero-meta { font-size: 10px; }
   .hero-actions .button { min-height: 48px; }
   .hero-portrait-frame { box-shadow: 0 18px 42px rgba(30,57,99,.15); }
