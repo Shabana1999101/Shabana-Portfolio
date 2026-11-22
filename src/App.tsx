@@ -30,7 +30,7 @@ gsap.registerPlugin(ScrollTrigger)
 const AmbientScene = lazy(() => import('./AmbientScene'))
 
 const transition = { duration: 0.55, ease: [0.22, 1, 0.36, 1] as const }
-const heroStatement = 'I lead enterprise programs, build strategic partnerships, and deliver excellence at global scale.'
+const heroStatement = 'I lead cross-functional technology and transformation programs, aligning stakeholders, delivery teams, and strategic partners to strengthen governance, execution, and business outcomes.'
 type PortfolioTheme = 'morning' | 'afternoon' | 'night'
 
 const themeOptions = [
@@ -116,9 +116,6 @@ function SiteHeader({ theme, onThemeChange }: { theme: PortfolioTheme; onThemeCh
             {item.label}
           </NavLink>
         ))}
-        <NavLink className="nav-dashboard" onClick={() => setIsMenuOpen(false)} to="/dashboard">
-          Dashboard <ArrowUpRight size={13} />
-        </NavLink>
       </nav>
       <motion.button aria-label={`Switch to ${nextTheme.label} theme`} className={`theme-toggle theme-toggle-${theme}`} onClick={() => onThemeChange(nextTheme.value)} title={`Switch to ${nextTheme.label} theme`} type="button" whileTap={{ scale: .88, rotate: -12 }}>
         <AnimatePresence initial={false} mode="wait">
@@ -147,8 +144,8 @@ function SiteFooter() {
       </div>
       <div className="footer-bottom">
         <span>Hyderabad, India <span className="status-dot" /> I&apos;m available for meaningful conversations</span>
-        <nav aria-label="Footer navigation">
-          {[...navigation, { label: 'Contact', path: '/contact' }].map((item) => (
+          <nav aria-label="Footer navigation">
+            {navigation.map((item) => (
             <Link key={item.path} to={item.path}>{item.label}</Link>
           ))}
         </nav>
@@ -188,13 +185,13 @@ function SiteShell({ theme, onThemeChange }: { theme: PortfolioTheme; onThemeCha
     if (reducedMotion || !contentRef.current) return
     const context = gsap.context(() => {
       gsap.utils.toArray<HTMLElement>('[data-gsap]').forEach((element, index) => {
-        gsap.fromTo(element, { y: 54, opacity: 0, scale: .96, rotateX: index % 2 ? 5 : -5, transformPerspective: 1100 }, {
+        gsap.fromTo(element, { y: 20, opacity: 1, scale: .99, rotateX: index % 2 ? 1 : -1, transformPerspective: 1100 }, {
           y: 0,
           opacity: 1,
           scale: 1,
           rotateX: 0,
-          duration: 1.1,
-          delay: (index % 4) * 0.08,
+          duration: .65,
+          delay: (index % 3) * 0.04,
           ease: 'power4.out',
           scrollTrigger: { trigger: element, start: 'top 90%', once: true },
         })
@@ -302,6 +299,7 @@ function SiteShell({ theme, onThemeChange }: { theme: PortfolioTheme; onThemeCha
               <Route element={<HomePage theme={theme} />} path="/" />
               <Route element={<AboutPage theme={theme} />} path="/about" />
               <Route element={<ExperiencePage />} path="/experience" />
+              <Route element={<ExperiencePage />} path="/case-studies" />
               <Route element={<CompanyStoryPage />} path="/experience/:slug" />
               <Route element={<LeadershipPage />} path="/leadership" />
               <Route element={<SkillsPage />} path="/skills" />
@@ -369,14 +367,14 @@ function HomePage({ theme }: { theme: PortfolioTheme }) {
             <Eyebrow icon={<span className="status-dot" />}>I lead technical programs at {profile.company}</Eyebrow>
           </motion.div>
           <motion.h1 animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 26 }} transition={{ ...transition, delay: 0.16 }}>
-            Shabana <span>Ajmin</span>
+            Enterprise Program<br /><span>&amp; Delivery Leader</span>
           </motion.h1>
           <p className="hero-statement">
-            {heroStatement.split(' ').map((word, index) => <span className="hero-word" key={`${word}-${index}`} style={{ animationDelay: `${index * 90}ms` }}>{word}</span>)}
+            {heroStatement.split(' ').map((word, index) => <span className="hero-word" key={`${word}-${index}`}>{word}</span>)}
           </p>
           <motion.div className="hero-actions" animate={{ opacity: 1, y: 0 }} initial={{ opacity: 0, y: 16 }} transition={{ ...transition, delay: 0.35 }}>
-            <Link className="button button-primary" to="/experience">View journey <ArrowRight size={16} /></Link>
-            <Link className="button button-quiet" to="/leadership">Leadership impact <ArrowDownRight size={16} /></Link>
+            <a className="button button-primary" href={profile.resumeUrl} rel="noreferrer" target="_blank">Download Résumé (PDF) <ExternalLink size={15} /></a>
+            <Link className="button button-quiet" to="/experience">View experience <ArrowRight size={16} /></Link>
           </motion.div>
           <div className="hero-meta">
             <span><span className="meta-label">CURRENTLY</span>{profile.company}</span>
@@ -401,7 +399,7 @@ function HomePage({ theme }: { theme: PortfolioTheme }) {
           <Link className="text-link" to="/leadership">Explore impact <ArrowUpRight size={14} /></Link>
         </div>
         <div className="metrics-grid">
-          {metrics.map((metric, index) => <MetricBlock key={metric.label} {...metric} index={index} />)}
+          {metrics.slice(0, 4).map((metric, index) => <MetricBlock key={metric.label} {...metric} index={index} />)}
         </div>
       </section>
 
